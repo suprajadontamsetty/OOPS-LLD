@@ -1,0 +1,36 @@
+1. Virtual function: A normal virtual function provides basic implementation and can be overriden. It has choice for overriding    the function.Not mandatorily required to override the function.
+Ex:
+class Animal
+{
+public:
+    virtual void sound()
+    {
+        cout << "Animal sound";
+    }
+};
+
+
+
+2. Pure vitual function:Doesnt provide any basic implementation and mandatorily has to be overriden (forces derived classes to override) making the class abstract class.
+ Ex:
+ class Animal
+{
+public:
+    virtual void sound() = 0;  ->Animal is an abstract class.
+};                                      
+
+
+3. Class Diagrams: (a)Class Structure (b)Association
+   (a)Class Structure: Define the class with data members and functions.
+     For access modifiers , we use (+) for public, (-)private and (#)protected.
+
+   (b)Association:Connection between classes and objects is defined.It is of two types.
+      (1)Class association: Inheritance.(is-a) relationship
+      (2)Object association: 1.Simple
+                             2.Aggregation
+                             3.Compostion   Note: All the 3 are also called compostion.(has-a) relationship.
+
+
+
+
+       
