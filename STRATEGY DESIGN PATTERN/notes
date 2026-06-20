@@ -1,0 +1,35 @@
+STRATEGY DESIGN PATTERN:
+ENCAPSULATIING A FAMILY OF ALGORITHMS OR BEHAVIOURS INTO SEPERATE CLASSES AND MAKING THEM INTERCHANGABLE.
+"Strategy means:Take the part of your program that might change in the future and separate it from the part that stays the same".
+
+Example:
+Imagine you're ordering food.
+You tell the delivery app:
+"Get me my food."
+The app has multiple delivery partners:
+Swiggy Genie
+Dunzo
+Porter
+The app doesn't care which one actually delivers the food. It only knows:
+"I need someone to deliver this order."
+At the last moment, it chooses one of the delivery partners.
+That's Strategy.
+
+Without Strategy:
+If Swiggy available
+    use Swiggy
+Else if Dunzo available
+    use Dunzo
+Else if Porter available
+    use Porter 
+
+With Strategy:
+Swiggy Delivery
+Dunzo Delivery
+Porter Delivery    
+
+Components:
+--Strategy Interface (Define common behaviour)
+--Concrete Strategies (Implement different algorithms)
+--Context class(Uses a strategy)
+--Client code(Chooses the strategy)
