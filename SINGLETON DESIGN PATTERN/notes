@@ -1,0 +1,13 @@
+SINGLETON DESIGN PATTERN :
+Only one instance of a class exists throughout the application and provides a single global point od access to it.
+
+This is used at places where resources that should exist only once: 1.DB connection manager 2. Cache manager etc.
+
+Prevents accidental creation of multiple instances and ensures controlled, effiecient use of resources like memory and connections.
+
+Features:
+1.Single instance.
+2.Global access point: Provides centralized way to acesss the instance.
+3.Lazy or eager initialization: An instance can be created at class load time (eager) or when first needed(lazy).
+4.Thread efficiency: Can be designed to work correctly in multithreaded env.
+5.Resource management: Useful for managing shared resources like configuartions, logging or DB connections.
