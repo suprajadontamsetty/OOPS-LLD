@@ -1,0 +1,34 @@
+FACTORY DESIGN PATTERN: 
+We seperate object creation and business logic.We only focus on Object creation.
+Factory creates an object and gives it to client.
+
+Usually defined in 3 types: 1. Simple Factory -- Kind of design principle.
+                            2. Factory Method         --- Design pattern
+                            3. Abstract Factory Method --- Design pattern
+SIMPLE FACTORY:
+Lets say we have Burger as an abstract class and it has 3 types varities. Now creating a burger(object) is what we do.
+--Burger and its 3 varities are product but creating burger is done by factory.
+We create class of Burger Factory which produces burger. It returns an object called Burger. Now these burger can be of different types.
+--Burger factory has a burger.(composition)
+
+FACTORY METHOD:
+It defines an interface for creating objects but lets subclasses decide which object to instantiate. It promotes loose coupling by delegating object creation to a method, making the system more flexible and extensible.
+--Subclasses override the factory method to create specific object types,enabling flexible object creation.
+--Supports easy addition of new product types and improves maintainability and adaptability at runtime.
+
+Example:
+Consider a Notification System where you need to send different types of notifications like Email, SMS, or Push notifications. Instead of creating objects directly, you use a Factory Method to decide which notification to create.
+
+
+ABSTRACT FACTORY METHOD:
+The Abstract Factory Pattern is a creational design pattern that provides an interface for creating families of related or dependent objects without specifying their concrete classes. It acts as a "factory of factories," where a super-factory creates other factories that in turn produce specific objects.
+
+Example:
+ A UI theme system supports Light and Dark themes, where each theme provides its own set of components like Button and TextBox. The application uses a factory to create these components, allowing it to switch between themes without changing the main code.
+ 
+
+
+
+
+
+
