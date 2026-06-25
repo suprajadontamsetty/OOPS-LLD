@@ -1,0 +1,21 @@
+It creates a one to many relationship between a subject and its observers. When the subject's state changes, all dependent observers are notified and updated automatically
+--ensuring synchronized communication.
+
+1.It enables automatic updates to multiple objects when one object changes, useful for event driven or publish subsrcibe systems.
+2. promotes loose coupling between the subject and its observers, improving flexibility and maintainability.
+
+Ex:
+Youtube channel(subject) notifies when all it subscribers (observers) whenever new video is uploaded.
+
+Components:
+ 1.Subject(Abstract class): Maintains list of observers, provides methods to add/remove them, and notifies them of state changes.
+ 2.Observer(Abstract class): Defines an interface wtih an update() method to ensure all observers receive updates consistently.
+ 3.Concrete Subject: A specific subject that holds actual data. On state changes, it notifies registered observers.
+ 4.Concrete Observer:Implements the observer interface and reacts to subject updates.
+
+
+***The observer interface is usually essential because multiple observer types exist and the subject must treat them uniformly.
+The subject inteface is optional and becomes useful when:
+ -- You have multiple subject Implementations.
+ --Observers shouldn't depend on concrete subjects.(Loose coupling)
+ --Client code should work with subjects polymorphically.
