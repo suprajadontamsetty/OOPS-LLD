@@ -1,0 +1,56 @@
+Creating a food delivery app.
+Things required:
+  1.Restaurant class----id, name, address, vector<Menu Item>menu (Model class)
+  2.Menu Item class-code for item, name, price --Model class as it has no functionalities.
+Restaurant has menu items(has-a) relationship. 
+**Menu item can exist independently. For say in an particular area when we can check for a particular dish, it doesnt depend on Restaurant.
+But for this case lets assume Menu Item is dependent on Restaurant.
+(Composition relationship).
+
+We will have various Restaurants in the app. Some actively yake orders, some dont, some new Restaurants are added some are removed etc.
+So to manage Restaurants we need a Restaurant Manager which does certian operations like CRUD, searching Restaurants by location.
+
+Here Restaurant and RestaurantManager have aggregation relationship(Composition).
+--Restaurant can exist independently. RestaurantManager must be a singleton.
+3.RestaurantManager--vector<Restaurant>restaurants, addRes();, searchByLoc(loc);
+
+Restaurant Manager acts as the one where anyone can indirectly contact Restaurants. By this we can kee things loosely coupled.
+Manager objects are preffered in such cases.
+
+4.User class --id, name,address,cart (Model class)
+5.Cart class-- Restaurant res, vector<Menu Items>items, total price, addToCart(item), clear(), isEmpty()
+  Cart and Restaurant can exist independently so simple association relationship.
+  Cart has menu Items.
+  Cart cannot exist independentlywithout user. So they have Composition realtionship
+
+6.Payment Strategy (abstract class)--pay()
+  It will have UPI,NET Banking, CC (Strategy Design Pattern)
+
+ 7. Order --id, Restaurant res, vector<Menu Item>Items, User user, PaymentStrategy ps, getType()
+ -- This can be an abstract class as getType of order is an pure virtual method.
+ -- Order has a user(simple association)
+ --Order has Restaurant, Has PaymentStrategy, has user, has Menu Items.
+-- inheritance for the getType() of orders. 1.Delivery order and 2.Pickup order 
+
+To make more scalable we can use Factory method pattern for order, this will create orders.
+8.Order Factory(abstract class)--creates order(), 
+  CreateOrder()--1.Now Order Factory 2. Schedule Order Factory.(These two override createOrder())
+  -- Both of them can do Delivery Order anD Pickup Order
+  --Order Factory has a order.(We dont draw this in UML as relationship is shown through concrete classes to concrete product)
+    
+ 9.Order Manager class- vector<order>orders (one to many relationship between Order manager and orders.), addOrder(order)
+   --Order Manager has an aggregation relationship with order (one to many)
+   --Singleton
+
+10.Notification Service class- Notify(order)
+
+11.Tomato class --Acts as Orchestrator , intercats with all the classes and gives an single point of contact to the client
+ --Client can be frontend, user( basically who sends request)
+ --It will take request from client and deliget them to respected classes.
+ --But here it should know about all the objects to deligate and make it loosely coupled and client doesnt get in contact directly with other classes.
+ --But doing this also breaks SRP and Principle of least Knowledge. So in some situations we need take a trade off
+
+
+
+
+  
