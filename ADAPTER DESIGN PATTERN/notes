@@ -1,0 +1,27 @@
+This acts as a bridge between two incompatible interfaces, allowing them to work together.
+It is especially useful for intergrating legacy code or third party libraries into a new system.
+
+It enables classes with incompatible interfaces to collaborate witout modifying their source code.
+It promotoes code reusability by allowing existing functionality to be used in new systems.
+It can be implemented in two ways: 1. Class Adapter(using inheritance)
+ 2. Object Adapter(using composition)
+
+ Example:
+ Software uses different file formats (like CSV, JSON, XML) uses adapters to convert these into a format that thr application can work with facilitating data interoperability.
+
+ Components:
+ TARGET INTERFACE:The intreface expected by the cliet, definifing the operations it can use.
+
+ ADAPTEE:The existing class with an incompatible interface that needs intergration
+
+ ADAPTER:Implements the target interface and uses the adaptee internally, acting as a bridge.
+
+ CLIENT: Uses the target interface, unaware of the adapter or adaptee details.
+
+ WORKING:
+ Client initiates a req by calling a method on the adapter via target interface.
+ The adapter maps or transforms the client's req into a format that adaptee can understand using the adaptee's interface.
+ The adaptee does the actual job based in the translated req from the adapter.
+ The client receives the results of the call, remaining unware of the adapter's presence or the specific details of the adaptee.
+
+ 
