@@ -1,0 +1,19 @@
+It encapsulates a request as an object, which decouples the sender of the request 
+  from the receiver and allowing flexible execution of operations.
+It turns a request into object so that it can be passed, stored, queued or undone easily.
+Encapsulates the request as an object and decouples the sender from receiver.
+
+Ex:
+A remote contorller-- user sends command like turining on lights, TV, AC, etc. 
+ The remote doesnot directly control the devices instead, it passes command objects to them. Each device then executes the 
+ the command independently, keeping the sender and receiver loosely coupled.
+
+ REMOTE CONTROLLER-- COMMAND-->LIGHT 
+                  --COMMAND-->TV 
+                  --COMMAND-->SPEAKERS
+
+Components:
+Command Interface: Declares the common method for all commands.
+Concrete Commands: Implement the interface and encapsulates specific actions
+Invoker: Initiates the command execution without knowing the details
+Receiver:Performs the actual operation defined by the command.                  
