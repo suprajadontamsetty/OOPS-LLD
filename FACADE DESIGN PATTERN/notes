@@ -1,0 +1,29 @@
+FACADE: Hides complexity
+This pattern provides a simple and unified interface to a complex subsystem.
+It hides the internal complexity of the system, making it easier to use and maintain.
+
+Structuring a system into subsystems helps reduce overall complexity and improves organization. A common design goal is to minimize comm and dependencies between these subsystems.
+
+This pattern achives this by introducing a facade objet thar acts as a sinhle entry point, providing a simplified interface to the underlying subsystem functionality
+
+Applications:
+Banking systems: Exposes simple methods for balance checks and fun transfers while concealing complex backend operations from the client.
+
+Components:
+1.Facade(Compiler):Provides a simplifier interface to interact with the complex compiler subsystem.
+  It knows which subsystem classes are responsible for a request. It delegates client requests to appropriate subsytem objects.
+
+2.Subsystem classes: These perform core functionality of the compiler system.
+Implements subsystem functionality and handles the tasks assigned by the facade object.
+Has no knowledge of the facade, meaning it doesnt not maintain any reference to it.
+
+3.Interface:Defines set of high level operations that the client can use.
+The inteface refers to the set of simplified methods that the facade exposes to the client.
+It hides the complexities of the subsystem, esuring that clients interact only with high-level operations, without dealing with the underlying details of the system.
+
+
+Working:
+1.Client interacts only with the facade class instead of multiple susbsystem classes.
+2.Facade internally calls the required methods of different subsystems.
+3.Subsystem classes remain unchanged and unaware of the facade.
+4.The facade simplifies complex workflows into easy-to-use operations.
