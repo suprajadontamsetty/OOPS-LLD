@@ -1,0 +1,21 @@
+This pattern lets us dynamically add behaviour to individual objects without changing other objects of the same class.
+It uses decorator classes to wrap concrete components, making functionality more flexible and reusable.
+Wraps existing objects using decorator classes to add new behaviour at runtime.
+Extends functionality without modifying original code, following the OCP.
+
+Ex:
+1.Coffee shop: A coffee is enhanced with add on like milk, sugar, or whipped cream.
+2.video streaming platforms: Videos can be wrapped with decorators for subtitles, audios or language options
+
+Components:
+Both decorator and components classes have is-a and has-a relationship.
+1.Component Interface: Defines common operations for components and decorators.(Decorator inherits from Component).
+2.Concrete Component: Core object with basic funcationality 
+3.Decorator: Abstract wrapper that holds component reference and adds behaviour.
+4.Concrete Decorator: Specific decorators that extend functionality of the component.
+
+Working:
+Define component interface that both core object and decorators implement.
+Create a concrete component that implements the interface.
+Create decorator classes that also implement the interface and have a refernce to a common object.
+Decorator classes add or override behaviour by delegating to the wrapped object
