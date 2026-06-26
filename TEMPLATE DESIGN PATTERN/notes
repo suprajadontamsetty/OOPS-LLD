@@ -1,0 +1,16 @@
+It defines the overall structure of an algorithm in a base class. It allows subclasses to override specific steps of the algorithm without changing its core structure.
+Promotes code reuse and ensures consistent behaviour across implementations.
+
+Components:
+1.ABSTRACT CLASS/ INTERFACE: Defines template method(algo skeleton) with some steps implemented and others left abstract or as hooks for customization.
+2.TEMPLATE METHOD: Outlines the algorithm's fixed structure by calling steps in order, often marked final to prevent changes.
+3.ABSTRACT METHODS:Placeholder methods in the abstract class that subclasses implement or optionally override.
+4.CONCRETE SUBCLASSES:Provide implementations for abstract methods,customizing specific steps while preserving the overall algorithm.
+
+Working:
+The base class contains a template method
+Some steps are implemented in the base class, while others are abstract or overridable.
+Subclasses provide their own implementation for the variable steps.
+The algorithm structure remains unchanged.
+
+
