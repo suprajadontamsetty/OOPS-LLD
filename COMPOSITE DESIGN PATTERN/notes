@@ -1,0 +1,64 @@
+It is a structural design pattern.
+It organizes objects into tree structures, enabling clients to treat
+ individual and composite objects uniforly through a common interface.
+Simplifies code and supports easy extension without modifying client logic. 
+
+Explanation:
+We have a FILESYSTEM---1.Folders ----1.1 Folders
+                       2.Files       1.2 Files
+Its a tree structure
+File is similar to leaf node and folder is similar to composite nodes.     
+
+class FILE-- name, size(), open()[It is a method which gives content of file when method is called. ]
+
+class FOLDER-- name, vector<Files>files, vector<Folder>folders
+**FOLDER can have 1-to-many Files and can also have 1-to-many folders.
+
+Now we use some commands like;-
+ls()--list directory --lists all the files and folders present in a root folder.
+Ex : ROOT--1.file1.txt
+          2.file2.txt
+          3.folder
+          4.file3.txt
+
+openAll() -- expands the hierarchy   
+if call openAll on FILE -- cout<<FILENAME  
+if call openAll on FOLDER:
+ it will first go through vector<Files>files and cout << FILENAME and then goes through vector<Folder>folders and again in that folder if we have files cout << FILENAME and then go to folders and checks and same loop.
+ So output for the ROOT FOLDER would be --1.file1.txt
+                                          2.file2.txt
+                                          3.file3.txt
+                                          4.folder
+
+The order gets disrupted. To maintain order instead of seperate lists for files and folder we need to maintain same list for both files and folders.
+
+Considering a common list for both files and folders, vector<>CommonList;
+Now, calling method openAll():
+ first will check the type of the element in List:
+  for(){
+    if(ele==file){
+     cout<<FILENAME
+    }else{
+      ele->openAll()    i.e if it is folder will again call openAll() for the elements present inside the folder.
+    }
+  }
+
+  This is all mess using much more methods like this.
+  So we use COMPOSITE DESIGN PATTERN, which says we need to treat Composite and leaf nodes in same way that means they should have a common interface/class/abstract class
+  So that these will override the methods in common interface according to them. 
+  The adv is no if-else conditions has to be managed. etc
+
+Applications;
+File systems, represneting files, directories and hierarchical relationships.
+
+Components:
+1.COMPONENT: It is the common interface for all objects in the compostion. It defines the methods that are common to both leaf and composite objects.
+2.LEAF: Object that doesnt have any children
+COMPOSITE: Container object that has leaf objects and Composite objects.
+CLIENT:Client is responsible for using component interface to work with objects in the composition. Treats leaf and composite objects uniformly.
+
+
+Working:
+The client interacts with objects through common Component interface.
+Leaf objects perform actual work while composite objects store and manage child components.
+When an operation is called on a composite, it forwards the request to its children recursively.
