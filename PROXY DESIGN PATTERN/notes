@@ -1,0 +1,44 @@
+Usually USER---->(request)--->RESOURCEand resource replies for the request.
+
+But in this design pattern we introduce a "PROXY" in between User and Resource.
+Proxy object acts as a placeholder to control access to the real object. The client communicates with the proxy, which forwards requests to the real object.
+
+This helps to manage access to resource-intensive or sensitive objects without exposing 
+internal details and allows adding responsibilties like security or logging 
+without modifying the ral object.
+
+USER-->PROXY-->RESOURCE
+User doesnt know proxy replies to it.
+
+1.VIRTUAL PROXY: protect an expensive resource through proxy by not allowing to cretae the object until the methods are called (in expensive resource).
+  Because unecessary memeory is wasted. and no one is using that.
+
+  Here application method(expensive resource method) gets slowed down a bit when called because of proxy but 
+  it is a trade off better let it be bit late rather than using up unnecessary memory.
+
+2.REMOTE PROXY:Remote proxy acts as local representative for object running on different machine, handling communication details like network calls.
+
+3.SECURITY PROXY:These proxies can control access to sensitive resources by checking user permission before forwarding requests, commonly used in authentication and authorization systems.
+
+
+Components:
+1.SUBJECT:It is interface or an abstract class that defines the common interface shared by Real Subject and Proxy classes.
+ It declares the methods that the proxy uses to control access to the RealSubject.
+ Usually includes methods that client code can invoke on RealSubject and the proxy.
+
+2.REALSUBJECT:It is the actual object that proxy represents.It contains real implementation of the business logic or resource that client code want ti access.
+
+3.PROXY:It acts as surrogate for the RealSubject, It controls access to the real object and may provide addtional functionality such as "LAZY LOADING", "ACCESS CONTROL" or "LOGGING"
+It implements the same interface as RealSubject (SUBJECT INTERFACE)
+Maintains a reference to the RealSubject
+Controls access to the RealSubject, adding addtional logic if necessary.
+
+
+
+Working:
+Cliet interacts with proxy instead of real object.
+The proxy controls access to the real object  and may add extra behaviuir.
+The real object is created or accessed only when required.
+After processing, the proxy forwards the request to real object.
+
+
