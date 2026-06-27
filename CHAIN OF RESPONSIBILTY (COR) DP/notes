@@ -1,0 +1,25 @@
+CHAIN OF RESPONSIBILITY(COR):
+Lets say we have a Client who sends a requests to object. It usually doesnt send 
+request to one single object.There might be multiple objects.(Chain of objects)
+
+Ex:
+Client---> | R1, R2, R3 | R1, R2, R3 are 3 different objects and R1 has R2;s ref simlarly R2 has R3's. (Links like in Linked List)
+Now R1 checks whether it can fulfil the client requests. If yes it does or else sends it to R2 and again R2 checks 
+ whether it can be done by it or further send it to R3.
+
+ So there are objects connected by chain and if they client sends it s request to first object
+
+Ex: ATM
+In ATM every denomination is handled seperately by multiple handlers. 
+H1--1000 (x5), H2--500 (x10), H3--100(x20)
+And client request is 6000
+So H1 checks whether it can fulfil it of not requests goes to H2
+ In this condition 5000 is handled by H1 and remaining is sent to H2 for remaining 1000
+
+ What is difference between LL and COR:
+ LL:Stores the data and next pointer points to same object i.r can be reffered further only when they are same.
+ COR: It handles req but doesnot store data. and next pointer can point even if they arent same/similar objects.
+
+ But in over simplified view they are same. Multiple objects are connected.
+
+ 
