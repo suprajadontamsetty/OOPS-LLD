@@ -1,0 +1,189 @@
+Instead of creating object using new keyword, Builder Design Pattern is used.
+
+A client needs an object from a class (named as Target).
+So we write code as :Target* t= new Target();
+In heap memory a chunk of memory is reserved to store the object of Target and we get that object reference in 't'
+Likewise object is declared here.
+
+Lets say this object has lot of parameters and we can declare it through constructor.
+class Target{
+    int t1, t2, t3...tn;
+    Target(t1,t2,t3..tn){
+        //constructor
+        this->t1=t1;
+        .
+        .
+        .this->tn=tn;
+    }    
+    
+};
+So this is how we usually do for creating objects.
+
+Q:Then why do we need BUILDER DESIGN PATTERN
+--There can be many object references but there shouldnt be any issue while constructing them.
+In a complex object, which has lot of variables and constructor gets overloaded.
+
+S1--->S2(HTTP request)
+It has 1. URL 2. method(GET, POST, PUT etc) 3.headers 4. Query parameters. 5.Body 6.Timeout
+Now,For example:
+class HTTPReq{
+    string url;
+    string method;
+    map<string,string>headers;
+    .
+    .
+    .
+    HTTPReq(url,method, headers,..){
+        this->url=url;
+        this->method=method;
+    }
+
+    void execute(){
+        //HTTP CALL
+    }
+};
+
+//In client code:
+int main() {
+  HTTPReq* req=new HTTPReq(); // Here we need to pass url, method, headers etc..
+};
+
+--Now, if i have normal simple URL and i only know URL and METHOD.
+I dont have any header, query parameter, body, timeout as these are optional.
+But in the above constructor all the 6 are mandatory. What to do ?
+---We can create another constructor which takes only URL and method
+Similarly for different diff conditions we cant keep on having various combinations of constructors.
+
+So problems are: 1.CONSTRUCTOR OVERLOADING/ CONSTRUCTOR TELESCOPING
+2.Object is mutable (changeable) because of setters. But in some objects mutability is critical topic and we dont want them to change.
+3.Inconsistent state problem. 
+4.Sacttered Validation
+ Explanation for inconsistent state problem:
+
+class HTTPReq{
+    private:
+  string url;
+  string method;
+  map<string,string>headers;
+  map<string,string>Query;
+  string body;
+  int timeOut();
+
+  public:
+  HTTPReq(url,method,headers){
+    this->url=url;
+    this->method=method;
+    this->headers=headers;
+
+    void execute(){
+        //HTTP CALL
+    }
+  }
+  //and we also have getters and setters for private members.
+
+};
+
+int main() {
+ HTTPReq* req=new HTTPReq(url,GET,header);
+   req->setbody();
+   req->setTimemout();
+   req->setQuery();
+
+   req->execute(); //this sends the call.
+};
+
+Let us consider in this case we dont have any issue with object mutability and to overcome constructor overloading,
+we will have only one constructor having necessary fields passed to it like url, method and headers.
+And the optional fields can be passed through setters.
+Doing such , we dont have to create multiple constructors of different combinations as done in case1(Construtor overloading).
+But the HTTP Req we want send , requires all the fields necessarily.
+i.e when we call execute(); all values are defined before. We gave important ones into constructor and optional ones are called through setters in the above example.
+
+What if i didnot set query and timeout and run the command req->execute(); ?
+There wont be any compile time error. There will be runtime error.
+ --Because i didnt set optional values, that doesnt make any diff at compile time. So it runs there without error.
+ But the API call i want to make requires all the fields hence we get error there which is runtime error.
+
+--THIS IS CALLED INCONSISTENT STATE PROBLEM.--
+
+Example for validation:
+lets say someelse is working on my code, and in the api call as all the 6 fields are necessary, how to make sure the other person is including all the 6.
+I should have some validation logic to check.
+We can have this logic code in execute() as before executing we need to have the 6 fields.
+Ex:
+void execute(){
+    if(req->getUrl==null){
+        throw error;
+    }
+    if(req->header==null){
+        throw error;
+    }
+} but this leads to scattered validation.
+I have to check constantly that code isnt going into inconsistent state problem.
+
+
+**SO WE GO THROUGH 4 MAJOR PROBLEMS WHEN BUILDER DESIGN PATTERN ISNT USED**
+
+Solution:
+ We use a new class called Builder. 
+ CLIENT--->BUILDER-->TARGET.
+ Builder returns the object of target to client and we dont come across issues like Constructor overloading, objects mutability, inconsistent state problem, scattered validation.
+
+ **"this" keyword refers directly to the current object instance executing the code.
+
+ BUILDER WITH DIRECTOR;
+ --When we create an object, it might have some default states.
+ We use a director which manages builder. it stores the pre-existing default states which is being used repetatively, and mention it the in form of method of the class.
+
+ STEP BUILDER:
+ What problem it solves?
+ Example: 
+ In a pizza shop we have to customize our pizza and tell them every detail.
+ like Crust, Pizza sause, toppings, cheese etc.
+ Likewise there will be some objects which are to be build in a particular order.
+ Step Builder does that.
+In the previous two metnods we did only chaining but no order was specified, (or) can say the order of steps can be changed anytime and that doesnt matter in any way.
+But in Step Builder: 
+--1.Create object step by step.
+--2.If required(optional) it can validate about the members.
+EX:
+class Request{
+    string url;
+    string method;
+    string body;
+    
+}
+Builder--withURL, withMethod, ...build()  --This can be done in any order.
+In Step Builder, it has to be done in specific order.
+For this all the parameters have an pure abstract class
+Like class URLStep, -- this returns MthodStep object.  (i.e it has a reference of MethodStep)
+     class MethodStep, -- returns BodyStep obj.
+     class BodyStep. --As this is final step it returns Request's obj.
+We will have another class called StepBuilder which inherits all the three classes
+ -URLStep, MethodStep and BodyStep.
+it will have withURL() which it will inherit from URLStep and will also have reference of Request class and 
+req.url=url;
+return *this;
+
+
+Working:
+Client will get a reference of StepBuilder.
+As client starts, It will get urlStep (from class URLStep) reference and returns nextStep Object to client.
+and so on happerns.
+So client gets an object reference calls the method available in that class and then in return gets obj of next Method/Step 
+and at last step client gets the object of the class on whose object we actually wanted to work on.
+
+On optional parameters we create a single abstract class and put all the different methods in single class named as OptionalStep.
+And for mandatory parameters we have seperate abstract classes for each one of them.
+The optional step class , it dont return its nextStep object so client understands these are optional and can be called in any order or wont call them at all, anything works.
+
+
+
+
+
+
+
+
+
+
+

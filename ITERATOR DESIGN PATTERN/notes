@@ -1,0 +1,7 @@
+We have an object obj1.
+It can LinkedList, Binary Tree etc.
+And to traverse in LL we take a temp and loop through the List until the temp!=NULL;
+In bINARY TREE we have lot of Traversal ways.
+
+Ex:
+PLAYLIST---->(1...*)-->SONGS(string name, string path);
