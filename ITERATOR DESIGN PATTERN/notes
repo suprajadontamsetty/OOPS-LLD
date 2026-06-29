@@ -1,7 +1,19 @@
-We have an object obj1.
-It can LinkedList, Binary Tree etc.
-And to traverse in LL we take a temp and loop through the List until the temp!=NULL;
-In bINARY TREE we have lot of Traversal ways.
+This pattern allows sequential access to elements of a collection without exposing its internal structure.
+It defines a seperate object, called iterator, which encapsulates the details of traversing the elements of the aggregate, allowing the aggregate to change its internal structure without affecting the way its elements are accessed.
+It is simple and frequently used design patter. There are a lot of data structures/collections available in every language.
+Each collection must provide an iterator that lets it iterate through its objects. However while doing so it shoukd mae that it does not exposee its implentation.
 
-Ex:
-PLAYLIST---->(1...*)-->SONGS(string name, string path);
+COMPONENTS:
+Iterator Interface/Abstract Class: Defines the interface for accessing and traversing elements in the collection. It typically includes methods like hasNext(), next(), and optionally remove().
+Concrete Iterator: Implements the Iterator interface and maintains the current position in the traversal of the aggregate. It provides the actual implementation for the traversal operations defined in the Iterator interface.
+Aggregate Interface/Abstract Class: Defines the interface for creating an Iterator object. It typically includes a method like createIterator() that returns an Iterator object for the collection.
+Concrete Aggregate: Implements the Aggregate interface and represents the collection of objects. It provides the implementation for creating an Iterator object that can traverse its elements.
+
+
+Working:
+This pattern works by providing a separate object to traverse elements of a collection sequentially.
+
+The collection provides an iterator object.
+The iterator keeps track of the current position.
+Methods like hasNext() and next() are used to move through elements.
+The internal structure of the collection remains hidden.
