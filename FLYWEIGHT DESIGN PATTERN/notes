@@ -1,0 +1,66 @@
+Use case:
+In our RAM we have many objects.We they are in huge number, they occupy lot of space. Ram gets overloaded with objects and it cant handle that.
+To save RAM from this situation we use FLYWEIGHT DESIGN PATTERN.
+It says:It is not necessary to create new object every time, rather reuse the existing objects.
+
+Example:
+We are designing a game. 
+The game is shooting asteriods. Millions of objects get created continously in this game.
+Let us consider these asteriods as objects.
+RAM is limited but we create lot of objects(asteriods) which is required for game.
+RAM might get crashed .
+Solution:
+WE can reuse the asteriods.Rather than creating it every time.
+
+Consider class Asteriod: int length, int width, int weight, string colour, string texture, int posx  posy, int velx vely
+now will check how much space they occupy in ram.
+INT-4BYTES
+STRING-8 -12BYTES...
+So what if we make 10lakh asteriods
+=>10lakh(x)1 asteriod's occupied space.
+High memory consumption. To minimize it we can divide the properties of considered object. INTRINSIC AND EXTRINSIC PROPERTIES.
+
+Length of asteriod can be = 10-30cm
+Width=10-30cm
+Weight=vyz..
+Likewise we decide some values for all the parameters.
+
+So why cant we reuse them rather than creating new objects.When all the asteriods are copy of each other.
+What differs is Position(posx , posy) and velocity(velx , vely) of asteriods.
+
+Length, width,weight, colour and texture , all the parameters will be in a specific range and wont exceed.
+
+So, from 10Lakh asteriods somewhere 3L asteriods will have exact same features, some other 3L with same and some 4L with same features(some rough estimation)
+So instead of creating 3L new objecs we can create a single object and reuse it and similarly for other bunch of asteriods.
+
+INTRINSIC: Property which is same for most of the objects and it can be re-used. In asteriods example it will be length, width, weight, colour, texture.
+
+EXTRINSIC:Which is diff for every object and cant be reused. Position and Velocity.
+
+FLYWEIGHT DESIGN PATTERN:
+--Seperate extrinsic properties from object. And object is left with Intrisic properties and we can reuse them.
+Object left with intrinsic properties, the class is named as Asteriod Flyweight.
+And the position(posx, posy) and velocity(velx, vely) are grouoed under new class named as Asteriod Context.
+and It will have a reference of Asteriod flyweight.
+
+Now flywieght and context are two different objects.
+
+Asteriod context objects will be huge. According to our example they will be of 10Lakhs.(on an average because positions and velocities are different for each each asteriod)
+
+Asteriod flyweight:They get reused , and let say there are number of P&C for these still they aere limited. (Not as context objects).
+
+Now, we consider a map<key,AsteriodFlyweight>pool;
+for asteriod flyweight object.
+key=unique value. we can create it like;
+Length+ '|' + width + '|' + weight + '|' + color + '|' + texture + '|'-- this will be unique value
+Ex:
+10|10|1|Red|Hard --> for objet1;
+20|20|Green|Soft-->for object2;
+
+So when 1st combination is preferred we return obj1 similarily for other combinations.
+
+WE create some objects in all possible combinations and reuse them. So all this can b done in a class named as FlyWeightFactory.It doesnt create new object everytime rather re-uses it.
+FlyWeightFactory has a Asteriod Flyweight.
+
+--SO TO REDUCE USAGE OF RAM WE RE-USE SOME OBJECTS WHICH ARE INTRINSIC.
+The intrinsic object must be immutable, because changing them changes all the same kind objects. Even if mutable , we should know it is mutable and we agree with that.
