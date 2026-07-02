@@ -1,0 +1,25 @@
+It is required when object creation is a time-consuming, and costly operation, so we create objects with 
+the existing object itself to by copying the existing ones.
+
+--The cloned object can modify only the required properties,avoiding the unnecessary changes to the original object.
+--This approach saves time and system resources, especially when object creation is expensive or complex.
+--The clone() method is simple way to implement ths pattern, but cloning logic depends on the specific business requirements.
+
+Example:Consider a game char system where creating a char involves loading graphics, skills and configurations.
+Instead of creating a new chAR from scratch every time:
+clone an existing char
+Modify attributes like name,weapon or level.
+Now use the new customized char.
+
+
+--Many modern applications use the Builder Pattern to improve flexibility and maintainability in object creation.
+
+This is used in Game Engines.
+--complex char or env object are cloned instead of being reinitialized.
+This improves performances by avoiding costly setup during gameplay or runtimw.
+
+COMPONENTS:
+1.Prototype Interface/Abstract class: Deines the clone() method and sets a standard for all objects they can be cloned.
+2.Concrete Prototype:Implemets the prototype interface or extends the abstract class to provide actual cloning behaviour.
+3.Client:Uses the prototype to create new objects by calling the clone() method.
+4.Clone method:Specifies how an object is copied  and is implememted by concrete prototypes.
