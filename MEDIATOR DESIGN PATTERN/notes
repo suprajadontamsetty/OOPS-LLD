@@ -1,0 +1,17 @@
+Obj1----->m1()--->obj2
+then obj2 responds with hello!
+Now will add obj3 and all the 3 have to interact .
+So obj1 will have reference of the obj2 and obj3 and similarly with the other two.
+and as number of objects increases, the number of references of other objects , an object has to keep also increases
+and objects also get tightly coupled.
+To avoid this we use Mediator Design Pattern.
+lets say have 4 objects.. obj1, obj2,obj3,obj4
+And we will have an MEDIATIOR OBJECT.
+The 4 objects doesnt have any reference of other objects. They have only reference of mediator object.
+MEDIATOR Object has reference to all the four objects.
+If obj1 has something like send(obj4, msg) and gives it MEDIATOR then, MEDIATOR sends that to obj4.
+MEDIATOR helps in interacting between objects.
+No more tight coupling due to MEDIATOR OBJECT.
+
+
+Defines an object that encapsulates how a set of objects interact, and promote loose coupling by preventing them from referring to each other.
