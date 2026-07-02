@@ -1,0 +1,14 @@
+A  has m1() and performing m1() it goes to state B 
+B has m2() and performing it goes to state C.
+And in state C perform m3() and goes to state A.
+(STATE MACHINE DIAGRAM) -->refer notes
+
+If there are limited number of states and limited number of methods and on every methid ut changes its state we can use STATE DESIGN PATTERN.
+
+Example:
+Vending Machine 
+Vending Machine hs lot of items and to interact with it we have a panel with screen and keypad. And has a despenSer to collect the item.
+1.When no one is using it ---NO COIN STATE
+2.When insert a coin---HAS COIN STATE
+3.Selecting item.---DESPENSE STATE
+4.SOLD OUT STATE
